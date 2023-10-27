@@ -13,6 +13,8 @@
   	-->
 
   </listeners>
+  
+  <parameter name="env" value="dev"></parameter>
   <test name="Run on Firefox">
   	<parameter name="browser" value="firefox"></parameter>
     <classes>
@@ -24,7 +26,7 @@
       -->
       
       <!--<class name="com.nopcommerce.commons.Common_02_Register_Cookie"/>-->
-      <class name="com.nopcommerce.user.Level_20_Fake_Data_P3_External_Json"/>
+      <class name="com.nopcommerce.user.Level_21_Multiple_Environment"/>
     </classes>
   </test> <!-- Test -->
 	<!-- 
