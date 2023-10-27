@@ -134,8 +134,20 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
-             <scope>runtime</scope>
+            <scope>runtime</scope>
         </dependency>
+        
+        <dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.19.0</version>
+		</dependency>
+  
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.19.0</version>
+		</dependency>
     </dependencies>
 
     <!-- Compiler/ Run Test -->
@@ -161,7 +173,7 @@
                 <configuration>
                     <!-- Run TestNG xml file -->
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/runNopCommerceUser.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/runNopcommerceTest.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
                     <!-- Argument -->
@@ -169,6 +181,8 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                 </configuration>
+
+
             </plugin>
         </plugins>
     </build>
