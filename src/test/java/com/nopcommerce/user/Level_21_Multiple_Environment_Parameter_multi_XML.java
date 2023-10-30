@@ -3,6 +3,7 @@ package com.nopcommerce.user;
 import java.lang.reflect.Method;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -16,12 +17,12 @@ import pageObjects.nopcommerce.user.UserHomePageObject;
 import pageObjects.nopcommerce.user.UserRegisterPageObject;
 import reportConfig.ExtentTestManager;
 
-public class Level_21_Multiple_Environment extends BaseTest {
+public class Level_21_Multiple_Environment_Parameter_multi_XML extends BaseTest {
 	
-	@Parameters({"browser", "env"})
+	@Parameters({"browser", "url"})
 	@BeforeClass
-	public void beforeClass(String browserName, String environmentName) {
-		driver = openMultiBrowser(browserName, environmentName);
+	public void beforeClass(String browserName, String appUrl) {
+		driver = openMultiBrowserByAppUrl(browserName, appUrl);
 		homePage = PageGeneratorManager.getUserHomePage(driver);
 		userData = UserDataMapper.getUserData();
 		
@@ -56,6 +57,11 @@ public class Level_21_Multiple_Environment extends BaseTest {
 //		} catch (Exception exception) {
 //			System.out.println(exception);
 //		}
+	}
+	
+	@AfterClass(alwaysRun = true)
+	public void afterClass() {
+		closeBrowserDriver();
 	}
 
 	private WebDriver driver;

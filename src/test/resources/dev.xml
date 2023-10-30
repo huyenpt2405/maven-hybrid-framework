@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="NopCommerce">
+  <listeners>
+  	<listener class-name="commons.MethodListener" />
+  	<listener class-name="reportConfig.ExtentTestListener" />
+  </listeners>
+  
+  <parameter name="url" value="https://demo.nopcommerce.com/" />
+  <test name="Run on Firefox - Dev">
+  	<parameter name="browser" value="firefox" />
+    <classes>
+      <class name="com.nopcommerce.user.Level_21_Multiple_Environment_Parameter_multi_XML"/>
+    </classes>
+  </test>
+</suite>
