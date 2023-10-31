@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="NopCommerce">
+<suite name="NopCommerce" parallel="false">
   <listeners>
   	<listener class-name="commons.MethodListener" />
   	<listener class-name="reportConfig.ExtentTestListener" />
@@ -14,28 +14,12 @@
 
   </listeners>
   
-  <parameter name="env" value="dev"></parameter>
+  <!-- <parameter name="env" value="dev"></parameter> -->
   <test name="Run on Firefox">
   	<parameter name="browser" value="firefox"></parameter>
     <classes>
-      <!--
-	      <class name="com.nopcommerce.user.User_01_Register_Apply_BasePage_I"/>
-	      <class name="com.nopcommerce.user.User_01_Register_Apply_BasePage_II"/> 
-	      <class name="com.nopcommerce.user.User_01_Register_Apply_BasePage_III"/>
-	      <class name="com.nopcommerce.user.User_01_Register_Apply_POM"/>
-      -->
-      
       <!--<class name="com.nopcommerce.commons.Common_02_Register_Cookie"/>-->
-      <class name="com.nopcommerce.user.Level_21_Multiple_Environment_Parameter"/>
+      <class name="com.nopcommerce.user.Level_21_Multiple_Environment_Owner"/>
     </classes>
-  </test> <!-- Test -->
-	<!-- 
-		<test name="Run on Chrome">
-	  	<parameter name="browser" value="chrome"></parameter>
-	    <classes>
-	      <class name="com.nopcommerce.user.Level_08_Switch_Role"/>
-	    </classes>
-	  </test>
-	-->
-  
-</suite> <!-- Suite -->
+  </test>
+</suite>

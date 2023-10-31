@@ -2,6 +2,7 @@ package com.nopcommerce.user;
 
 import java.lang.reflect.Method;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -11,6 +12,7 @@ import com.aventstack.extentreports.Status;
 import com.nopcommerce.data.UserDataMapper;
 
 import commons.BaseTest;
+import commons.Environment;
 import commons.PageGeneratorManager;
 import pageObjects.nopcommerce.user.UserHomePageObject;
 import pageObjects.nopcommerce.user.UserRegisterPageObject;
@@ -18,10 +20,15 @@ import reportConfig.ExtentTestManager;
 
 public class Level_21_Multiple_Environment_Owner extends BaseTest {
 	
-	@Parameters({"browser", "env"})
+	@Parameters({"browser"})
 	@BeforeClass
-	public void beforeClass(String browserName, String environmentName) {
-		driver = openMultiBrowser(browserName, environmentName);
+	public void beforeClass(String browserName) {
+		String environmentName = System.getProperty("EVN");
+		System.out.println("environmentName: " + environmentName);
+		ConfigFactory.setProperty("env", environmentName);
+		evn = ConfigFactory.create(Environment.class);
+		
+		driver = openMultiBrowserByAppUrl(browserName, evn.appUrl());
 		homePage = PageGeneratorManager.getUserHomePage(driver);
 		userData = UserDataMapper.getUserData();
 		
@@ -63,4 +70,5 @@ public class Level_21_Multiple_Environment_Owner extends BaseTest {
 	private UserRegisterPageObject registerPage;
 	private String emailAddress;
 	private UserDataMapper userData;
+	private Environment evn;
 }
