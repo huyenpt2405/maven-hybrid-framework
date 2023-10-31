@@ -6,25 +6,27 @@ import commons.BasePage;
 import pageUIs.sauceLab.sortData.LoginPageUI;
 
 public class LoginPageObject extends BasePage {
-	private WebDriver driver;
+	
+	WebDriver driver;
 
 	public LoginPageObject(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 	}
 
 	public void enterToUsernameTextbox(String username) {
-		waitForElementVisible(driver, LoginPageUI.USERNAME_TEXTBOX);
-		sendKeyToElement(driver, LoginPageUI.USERNAME_TEXTBOX, username);
+		waitForElementVisible(LoginPageUI.USERNAME_TEXTBOX);
+		sendKeyToElement(LoginPageUI.USERNAME_TEXTBOX, username);
 	}
 
 	public void enterToPasswordTextbox(String password) {
-		waitForElementVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
-		sendKeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
+		waitForElementVisible(LoginPageUI.PASSWORD_TEXTBOX);
+		sendKeyToElement(LoginPageUI.PASSWORD_TEXTBOX, password);
 	}
 
 	public ProductPageObject clickToLoginButton() {
-		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
-		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
+		waitForElementClickable(LoginPageUI.LOGIN_BUTTON);
+		clickToElement(LoginPageUI.LOGIN_BUTTON);
 		return PageGeneratorManager.getProductPage(driver);
 	}
 }
