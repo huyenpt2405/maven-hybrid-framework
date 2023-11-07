@@ -1,6 +1,8 @@
 package commons;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -13,11 +15,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import utilities.Browser;
 import utilities.EnvironmentList;
 import utilities.GlobalConstants;
 
@@ -31,35 +36,33 @@ public class BaseTest {
 	}
 	
 	protected WebDriver openMultiBrowser(String browserName) {
-		// Coc coc - 5,6 version so voi chromedriver
-		if (browserName.equals("firefox")) {
-//			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+		Browser browser = Browser.valueOf(browserName.toUpperCase());
+		if (browser == Browser.FIREFOX) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
-		} else if (browserName.equals("chrome")) {
-//			System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+		} else if (browser == Browser.CHROME) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
-		} else if (browserName.equals("h_chrome")) {
+		} else if (browser == Browser.H_CHROME) {
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--headless");
 			options.addArguments("window-size=1920x1080");
 			driver = new ChromeDriver(options);
-		} else if (browserName.equals("edge")) {
+		} else if (browser == Browser.EDGE) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
-		} else if (browserName.equals("cococ")) {
+		} else if (browser == Browser.COCCOC) {
 			WebDriverManager.chromedriver().driverVersion("versionchrome - 6").setup();
 			ChromeOptions options = new ChromeOptions();
 			options.setBinary("C:\\");
 			driver = new ChromeDriver(options);
-		}  else if (browserName.equals("brave")) {
+		}  else if (browser == Browser.BRAVE) {
 			WebDriverManager.chromedriver().driverVersion("versionChrome-4").setup();
 			ChromeOptions options = new ChromeOptions();
 			options.setBinary("C:\\");
 			driver = new ChromeDriver(options);
-		} else if (browserName.equals("opera")) {
+		} else if (browser == Browser.OPERA) {
 			WebDriverManager.operadriver().setup();
 			driver = new OperaDriver();
 		} else {
@@ -72,32 +75,33 @@ public class BaseTest {
 	}
 	
 	protected WebDriver openMultiBrowserByAppUrl(String browserName, String appUrl) {
-		if (browserName.equals("firefox")) {
+		Browser browser = Browser.valueOf(browserName.toUpperCase());
+		if (browser == Browser.FIREFOX) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
-		} else if (browserName.equals("chrome")) {
+		} else if (browser == Browser.CHROME) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
-		} else if (browserName.equals("h_chrome")) {
+		} else if (browser == Browser.H_CHROME) {
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--headless");
 			options.addArguments("window-size=1920x1080");
 			driver = new ChromeDriver(options);
-		} else if (browserName.equals("edge")) {
+		} else if (browser == Browser.EDGE) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
-		} else if (browserName.equals("cococ")) {
+		} else if (browser == Browser.COCCOC) {
 			WebDriverManager.chromedriver().driverVersion("versionchrome - 6").setup();
 			ChromeOptions options = new ChromeOptions();
 			options.setBinary("C:\\");
 			driver = new ChromeDriver(options);
-		}  else if (browserName.equals("brave")) {
+		}  else if (browser == Browser.BRAVE) {
 			WebDriverManager.chromedriver().driverVersion("versionChrome-4").setup();
 			ChromeOptions options = new ChromeOptions();
 			options.setBinary("C:\\");
 			driver = new ChromeDriver(options);
-		} else if (browserName.equals("opera")) {
+		} else if (browser == Browser.OPERA) {
 			WebDriverManager.operadriver().setup();
 			driver = new OperaDriver();
 		} else {
@@ -110,32 +114,33 @@ public class BaseTest {
 	}
 	
 	protected WebDriver openMultiBrowser(String browserName, String env) {
-		if (browserName.equals("firefox")) {
+		Browser browser = Browser.valueOf(browserName.toUpperCase());
+		if (browser == Browser.FIREFOX) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
-		} else if (browserName.equals("chrome")) {
+		} else if (browser == Browser.CHROME) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
-		} else if (browserName.equals("h_chrome")) {
+		} else if (browser == Browser.H_CHROME) {
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--headless");
 			options.addArguments("window-size=1920x1080");
 			driver = new ChromeDriver(options);
-		} else if (browserName.equals("edge")) {
+		} else if (browser == Browser.EDGE) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
-		} else if (browserName.equals("cococ")) {
+		} else if (browser == Browser.COCCOC) {
 			WebDriverManager.chromedriver().driverVersion("versionchrome - 6").setup();
 			ChromeOptions options = new ChromeOptions();
 			options.setBinary("C:\\");
 			driver = new ChromeDriver(options);
-		}  else if (browserName.equals("brave")) {
+		}  else if (browser == Browser.BRAVE) {
 			WebDriverManager.chromedriver().driverVersion("versionChrome-4").setup();
 			ChromeOptions options = new ChromeOptions();
 			options.setBinary("C:\\");
 			driver = new ChromeDriver(options);
-		} else if (browserName.equals("opera")) {
+		} else if (browser == Browser.OPERA) {
 			WebDriverManager.operadriver().setup();
 			driver = new OperaDriver();
 		} else {
@@ -144,6 +149,30 @@ public class BaseTest {
 		
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.get(getEnvironmentUrl(env));
+		return driver;
+	}
+	
+	protected WebDriver openMultiBrowserBrowserStack(String browserName, String appUrl, String osName, String osVersion) {
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability("os", osName);
+		capabilities.setCapability("os_version", osVersion);
+		capabilities.setCapability("browser", browserName);
+		capabilities.setCapability("browser_version", "latest");
+		capabilities.setCapability("name", "Run on " + osName + " | " + osVersion + " | " + browserName);
+		capabilities.setCapability("browserstack.local", "false");
+		capabilities.setCapability("resolution", "1920x1080");
+		capabilities.setCapability("browserstack.selenium_version", "3.141.59");
+
+		try {
+			driver = new RemoteWebDriver(new URL(GlobalConstants.BROWSERSTACK_URL), capabilities);
+		} catch (MalformedURLException e) {
+			System.out.println("failed");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get(appUrl);
 		return driver;
 	}
 	

@@ -22,4 +22,13 @@ public interface Environment extends Config {
 	
 	@Key("db.pass")
 	String dbPassword();
+	
+	@Key("app.osName")
+	String appOSName();
+	
+	@Key("app.osVersion")
+	String appOSVersion();
+	
+	@Key("app.browser")
+	String appBrowserName();
 }

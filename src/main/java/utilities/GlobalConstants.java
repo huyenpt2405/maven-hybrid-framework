@@ -30,4 +30,8 @@ public class GlobalConstants {
 	public static final long RETRY_TEST_FAIL = 5;
 	public static final String EXTENT_PATH = PROJECT_PATH + "File.separator";
 	public static final String JAVA_VERSION = System.getProperty("java.version");
+	
+	public static final String BROWSERSTACK_USERNAME = "huynphm_tgNvqW";
+	public static final String BROWSERSTACK_ACCESS_KEY = "81ig1uQSRzzsSwj2vWXy";
+	public static final String BROWSERSTACK_URL = "https://" + BROWSERSTACK_USERNAME + ":" + BROWSERSTACK_ACCESS_KEY + "@hub.browserstack.com/wd/hub";
 }

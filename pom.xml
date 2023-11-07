@@ -225,6 +225,11 @@
                         <suiteXmlFile>src/test/resources/${environment}.xml</suiteXmlFile>
                         -->
                         
+                        <!--
+                        <suiteXmlFile>src/test/resources/runNopcommerceTestBrowserStackOwner.xml</suiteXmlFile>
+                        -->
+                        
+                        
                     </suiteXmlFiles>
 
                     <!-- Argument -->
