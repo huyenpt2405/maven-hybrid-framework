@@ -10,19 +10,22 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import utilities.Browser;
+import factoryBrowser.BraveDriverManager;
+import factoryBrowser.BrowserList;
+import factoryBrowser.BrowserNotSupportedException;
+import factoryBrowser.ChromeDriverManager;
+import factoryBrowser.CocCocDriverManager;
+import factoryBrowser.EdgeDriverManager;
+import factoryBrowser.FirefoxDriverManager;
+import factoryBrowser.HeadlessChromeDriverManager;
+import factoryBrowser.HeadlessFirefoxDriverManager;
+import factoryBrowser.SafariDriverManager;
 import utilities.EnvironmentList;
 import utilities.GlobalConstants;
 
@@ -36,37 +39,35 @@ public class BaseTest {
 	}
 	
 	protected WebDriver openMultiBrowser(String browserName) {
-		Browser browser = Browser.valueOf(browserName.toUpperCase());
-		if (browser == Browser.FIREFOX) {
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-		} else if (browser == Browser.CHROME) {
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-		} else if (browser == Browser.H_CHROME) {
-			WebDriverManager.chromedriver().setup();
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--headless");
-			options.addArguments("window-size=1920x1080");
-			driver = new ChromeDriver(options);
-		} else if (browser == Browser.EDGE) {
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
-		} else if (browser == Browser.COCCOC) {
-			WebDriverManager.chromedriver().driverVersion("versionchrome - 6").setup();
-			ChromeOptions options = new ChromeOptions();
-			options.setBinary("C:\\");
-			driver = new ChromeDriver(options);
-		}  else if (browser == Browser.BRAVE) {
-			WebDriverManager.chromedriver().driverVersion("versionChrome-4").setup();
-			ChromeOptions options = new ChromeOptions();
-			options.setBinary("C:\\");
-			driver = new ChromeDriver(options);
-		} else if (browser == Browser.OPERA) {
-			WebDriverManager.operadriver().setup();
-			driver = new OperaDriver();
-		} else {
-			throw new RuntimeException("Cannot find browser");
+		BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
+		
+		switch (browser) {
+			case CHROME:
+				driver = new ChromeDriverManager().getBrowserDriver();
+				break;
+			case FIREFOX:
+				driver = new FirefoxDriverManager().getBrowserDriver();
+				break;
+			case EDGE:
+				driver = new EdgeDriverManager().getBrowserDriver();
+				break;
+//			case SAFARI:
+//				driver = new SafariDriverManager().getBrowserDriver();
+//				break;
+			case H_CHROME:
+				driver = new HeadlessChromeDriverManager().getBrowserDriver();
+				break;
+			case H_FIREFOX:
+				driver = new HeadlessFirefoxDriverManager().getBrowserDriver();
+				break;
+			case COCCOC:
+				driver = new CocCocDriverManager().getBrowserDriver();
+				break;
+			case BRAVE:
+				driver = new BraveDriverManager().getBrowserDriver();
+				break;
+			default:
+				throw new BrowserNotSupportedException(browserName);
 		}
 		
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -75,37 +76,35 @@ public class BaseTest {
 	}
 	
 	protected WebDriver openMultiBrowserByAppUrl(String browserName, String appUrl) {
-		Browser browser = Browser.valueOf(browserName.toUpperCase());
-		if (browser == Browser.FIREFOX) {
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-		} else if (browser == Browser.CHROME) {
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-		} else if (browser == Browser.H_CHROME) {
-			WebDriverManager.chromedriver().setup();
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--headless");
-			options.addArguments("window-size=1920x1080");
-			driver = new ChromeDriver(options);
-		} else if (browser == Browser.EDGE) {
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
-		} else if (browser == Browser.COCCOC) {
-			WebDriverManager.chromedriver().driverVersion("versionchrome - 6").setup();
-			ChromeOptions options = new ChromeOptions();
-			options.setBinary("C:\\");
-			driver = new ChromeDriver(options);
-		}  else if (browser == Browser.BRAVE) {
-			WebDriverManager.chromedriver().driverVersion("versionChrome-4").setup();
-			ChromeOptions options = new ChromeOptions();
-			options.setBinary("C:\\");
-			driver = new ChromeDriver(options);
-		} else if (browser == Browser.OPERA) {
-			WebDriverManager.operadriver().setup();
-			driver = new OperaDriver();
-		} else {
-			throw new RuntimeException("Cannot find browser");
+		BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
+		
+		switch (browser) {
+			case CHROME:
+				driver = new ChromeDriverManager().getBrowserDriver();
+				break;
+			case FIREFOX:
+				driver = new FirefoxDriverManager().getBrowserDriver();
+				break;
+			case EDGE:
+				driver = new EdgeDriverManager().getBrowserDriver();
+				break;
+			case SAFARI:
+				driver = new SafariDriverManager().getBrowserDriver();
+				break;
+			case H_CHROME:
+				driver = new HeadlessChromeDriverManager().getBrowserDriver();
+				break;
+			case H_FIREFOX:
+				driver = new HeadlessFirefoxDriverManager().getBrowserDriver();
+				break;
+			case COCCOC:
+				driver = new CocCocDriverManager().getBrowserDriver();
+				break;
+			case BRAVE:
+				driver = new BraveDriverManager().getBrowserDriver();
+				break;
+			default:
+				throw new BrowserNotSupportedException(browserName);
 		}
 		
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -114,37 +113,35 @@ public class BaseTest {
 	}
 	
 	protected WebDriver openMultiBrowser(String browserName, String env) {
-		Browser browser = Browser.valueOf(browserName.toUpperCase());
-		if (browser == Browser.FIREFOX) {
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-		} else if (browser == Browser.CHROME) {
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-		} else if (browser == Browser.H_CHROME) {
-			WebDriverManager.chromedriver().setup();
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--headless");
-			options.addArguments("window-size=1920x1080");
-			driver = new ChromeDriver(options);
-		} else if (browser == Browser.EDGE) {
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
-		} else if (browser == Browser.COCCOC) {
-			WebDriverManager.chromedriver().driverVersion("versionchrome - 6").setup();
-			ChromeOptions options = new ChromeOptions();
-			options.setBinary("C:\\");
-			driver = new ChromeDriver(options);
-		}  else if (browser == Browser.BRAVE) {
-			WebDriverManager.chromedriver().driverVersion("versionChrome-4").setup();
-			ChromeOptions options = new ChromeOptions();
-			options.setBinary("C:\\");
-			driver = new ChromeDriver(options);
-		} else if (browser == Browser.OPERA) {
-			WebDriverManager.operadriver().setup();
-			driver = new OperaDriver();
-		} else {
-			throw new RuntimeException("Cannot find browser");
+		BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
+		
+		switch (browser) {
+			case CHROME:
+				driver = new ChromeDriverManager().getBrowserDriver();
+				break;
+			case FIREFOX:
+				driver = new FirefoxDriverManager().getBrowserDriver();
+				break;
+			case EDGE:
+				driver = new EdgeDriverManager().getBrowserDriver();
+				break;
+			case SAFARI:
+				driver = new SafariDriverManager().getBrowserDriver();
+				break;
+			case H_CHROME:
+				driver = new HeadlessChromeDriverManager().getBrowserDriver();
+				break;
+			case H_FIREFOX:
+				driver = new HeadlessFirefoxDriverManager().getBrowserDriver();
+				break;
+			case COCCOC:
+				driver = new CocCocDriverManager().getBrowserDriver();
+				break;
+			case BRAVE:
+				driver = new BraveDriverManager().getBrowserDriver();
+				break;
+			default:
+				throw new BrowserNotSupportedException(browserName);
 		}
 		
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);

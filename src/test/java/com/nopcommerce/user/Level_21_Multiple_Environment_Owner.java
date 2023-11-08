@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -23,7 +24,7 @@ public class Level_21_Multiple_Environment_Owner extends BaseTest {
 	@Parameters({"browser"})
 	@BeforeClass
 	public void beforeClass(String browserName) {
-		String environmentName = System.getProperty("EVN");
+		String environmentName = System.getProperty("environment");
 		System.out.println("environmentName: " + environmentName);
 		ConfigFactory.setProperty("env", environmentName);
 		evn = ConfigFactory.create(Environment.class);
@@ -63,6 +64,13 @@ public class Level_21_Multiple_Environment_Owner extends BaseTest {
 //		} catch (Exception exception) {
 //			System.out.println(exception);
 //		}
+	}
+	
+	@AfterClass
+	public void afterClass() {
+		if (driver != null) {
+			driver.quit();
+		}
 	}
 
 	private WebDriver driver;

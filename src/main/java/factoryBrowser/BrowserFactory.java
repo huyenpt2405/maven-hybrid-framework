@@ -1,5 +1,7 @@
 package factoryBrowser;
 
-public class BrowserFactory {
+import org.openqa.selenium.WebDriver;
 
+public interface BrowserFactory {
+	WebDriver getBrowserDriver();
 }
