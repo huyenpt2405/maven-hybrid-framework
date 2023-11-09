@@ -2,21 +2,21 @@
 <suite name="NopCommerce" parallel="false">
   <listeners>
   	<listener class-name="commons.MethodListener" />
-  	<listener class-name="reportConfig.ExtentTestListener" />
   </listeners>
   
   <test name="Run on Firefox">
+  	<parameter name="browser" value="firefox"></parameter>
+  	<parameter name="osName" value="Windows"></parameter>
+  	<parameter name="osVersion" value="10"></parameter>
     <classes>
       <class name="com.nopcommerce.browseStack.Level_22_Multiple_Environment_Owner_Browser_Stack"/>
     </classes>
   </test>
   
   <test name="Run on Chrome">
-  	<!-- 
   	<parameter name="browser" value="chrome"></parameter>
   	<parameter name="osName" value="OS X"></parameter>
   	<parameter name="osVersion" value="Ventura"></parameter>
-  	-->
     <classes>
       <class name="com.nopcommerce.browseStack.Level_22_Multiple_Environment_Owner_Browser_Stack"/>
     </classes>

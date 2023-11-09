@@ -220,7 +220,7 @@
                 <configuration>
                     <!-- Run TestNG xml file -->
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/runNopcommerceTest.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/runNopcommerceTestBrowserStack.xml</suiteXmlFile>
                     	
                         <!--
                         <suiteXmlFile>src/test/resources/${environment}.xml</suiteXmlFile>

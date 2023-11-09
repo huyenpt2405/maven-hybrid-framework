@@ -4,7 +4,9 @@ import java.lang.reflect.Method;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
@@ -19,14 +21,14 @@ import reportConfig.ExtentTestManager;
 
 public class Level_22_Multiple_Environment_Owner_Browser_Stack extends BaseTest {
 	
-	@BeforeClass
-	public void beforeClass() {
-		String environmentName = System.getProperty("EVN");
+	@Parameters({"browser", "osName", "osVersion"})
+	public void beforeClass(String browserName, String osName, String osVersion) {
+		String environmentName = System.getProperty("environment");
 		System.out.println("environmentName: " + environmentName);
 		ConfigFactory.setProperty("env", environmentName);
 		evn = ConfigFactory.create(Environment.class);
 
-		driver = openMultiBrowserBrowserStack(evn.appBrowserName(), evn.appUrl(), evn.appOSName(), evn.appOSVersion());
+		driver = openMultiBrowserBrowserStack(browserName, evn.appUrl(), osName, osVersion);
 		homePage = PageGeneratorManager.getUserHomePage(driver);
 		userData = UserDataMapper.getUserData();
 		
@@ -61,6 +63,11 @@ public class Level_22_Multiple_Environment_Owner_Browser_Stack extends BaseTest 
 //		} catch (Exception exception) {
 //			System.out.println(exception);
 //		}
+	}
+	
+	@AfterClass
+	public void afterClass() {
+		closeBrowserDriver();
 	}
 
 	private WebDriver driver;

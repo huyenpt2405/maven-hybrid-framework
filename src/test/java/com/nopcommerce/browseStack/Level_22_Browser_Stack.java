@@ -3,6 +3,7 @@ package com.nopcommerce.browseStack;
 import java.lang.reflect.Method;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -56,6 +57,11 @@ public class Level_22_Browser_Stack extends BaseTest {
 //		} catch (Exception exception) {
 //			System.out.println(exception);
 //		}
+	}
+	
+	@AfterClass
+	public void afterClass() {
+		closeBrowserDriver();
 	}
 
 	private WebDriver driver;

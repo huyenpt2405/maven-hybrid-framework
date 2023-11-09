@@ -18,13 +18,12 @@
   <parameter name="appUrl" value="https://demo.nopcommerce.com/"></parameter>
   <test name="Run on Firefox">
   	<parameter name="browser" value="firefox"></parameter>
-  	
   	<parameter name="osName" value="Windows"></parameter>
   	<parameter name="osVersion" value="10"></parameter>
   	
     <classes>
       <!--<class name="com.nopcommerce.commons.Common_02_Register_Cookie"/>-->
-      <class name="com.nopcommerce.browseStack.Level_22_Multiple_Environment_Owner"/>
+      <class name="com.nopcommerce.browseStack.Level_22_Browser_Stack"/>
     </classes>
   </test>
   
@@ -34,7 +33,7 @@
   	<parameter name="osVersion" value="Ventura"></parameter>
     <classes>
       <!--<class name="com.nopcommerce.commons.Common_02_Register_Cookie"/>-->
-      <class name="com.nopcommerce.browseStack.Level_22_Multiple_Environment_Owner"/>
+      <class name="com.nopcommerce.browseStack.Level_22_Browser_Stack"/>
     </classes>
   </test>
 </suite>
