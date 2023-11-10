@@ -30,7 +30,7 @@ import utilities.EnvironmentList;
 import utilities.GlobalConstants;
 
 public class BaseTest {
-	private WebDriver driver;
+	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 	protected String projectPath = GlobalConstants.PROJECT_PATH;
 	protected final Logger log;
 	
@@ -43,36 +43,37 @@ public class BaseTest {
 		
 		switch (browser) {
 			case CHROME:
-				driver = new ChromeDriverManager().getBrowserDriver();
+				driver.set(new ChromeDriverManager().getBrowserDriver());
 				break;
 			case FIREFOX:
-				driver = new FirefoxDriverManager().getBrowserDriver();
+				driver.set(new FirefoxDriverManager().getBrowserDriver());
 				break;
 			case EDGE:
-				driver = new EdgeDriverManager().getBrowserDriver();
+				driver.set(new EdgeDriverManager().getBrowserDriver());
 				break;
 //			case SAFARI:
+//				driver.set(new SafariDriverManager().getBrowserDriver());
 //				driver = new SafariDriverManager().getBrowserDriver();
 //				break;
 			case H_CHROME:
-				driver = new HeadlessChromeDriverManager().getBrowserDriver();
+				driver.set(new HeadlessChromeDriverManager().getBrowserDriver());
 				break;
 			case H_FIREFOX:
-				driver = new HeadlessFirefoxDriverManager().getBrowserDriver();
+				driver.set(new HeadlessFirefoxDriverManager().getBrowserDriver());
 				break;
 			case COCCOC:
-				driver = new CocCocDriverManager().getBrowserDriver();
+				driver.set(new CocCocDriverManager().getBrowserDriver());
 				break;
 			case BRAVE:
-				driver = new BraveDriverManager().getBrowserDriver();
+				driver.set(new BraveDriverManager().getBrowserDriver());
 				break;
 			default:
 				throw new BrowserNotSupportedException(browserName);
 		}
 		
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.get(GlobalConstants.USER_PORTAL_URL);
-		return driver;
+		driver.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get().get(GlobalConstants.USER_PORTAL_URL);
+		return driver.get();
 	}
 	
 	protected WebDriver openMultiBrowserByAppUrl(String browserName, String appUrl) {
@@ -80,36 +81,36 @@ public class BaseTest {
 		
 		switch (browser) {
 			case CHROME:
-				driver = new ChromeDriverManager().getBrowserDriver();
+				driver.set(new ChromeDriverManager().getBrowserDriver());
 				break;
 			case FIREFOX:
-				driver = new FirefoxDriverManager().getBrowserDriver();
+				driver.set(new FirefoxDriverManager().getBrowserDriver());
 				break;
 			case EDGE:
-				driver = new EdgeDriverManager().getBrowserDriver();
+				driver.set(new EdgeDriverManager().getBrowserDriver());
 				break;
 			case SAFARI:
-				driver = new SafariDriverManager().getBrowserDriver();
+				driver.set(new SafariDriverManager().getBrowserDriver());
 				break;
 			case H_CHROME:
-				driver = new HeadlessChromeDriverManager().getBrowserDriver();
+				driver.set(new HeadlessChromeDriverManager().getBrowserDriver());
 				break;
 			case H_FIREFOX:
-				driver = new HeadlessFirefoxDriverManager().getBrowserDriver();
+				driver.set(new HeadlessFirefoxDriverManager().getBrowserDriver());
 				break;
 			case COCCOC:
-				driver = new CocCocDriverManager().getBrowserDriver();
+				driver.set(new CocCocDriverManager().getBrowserDriver());
 				break;
 			case BRAVE:
-				driver = new BraveDriverManager().getBrowserDriver();
+				driver.set(new BraveDriverManager().getBrowserDriver());
 				break;
 			default:
 				throw new BrowserNotSupportedException(browserName);
 		}
 		
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.get(appUrl);
-		return driver;
+		driver.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get().get(appUrl);
+		return driver.get();
 	}
 	
 	protected WebDriver openMultiBrowser(String browserName, String env) {
@@ -117,36 +118,36 @@ public class BaseTest {
 		
 		switch (browser) {
 			case CHROME:
-				driver = new ChromeDriverManager().getBrowserDriver();
+				driver.set(new ChromeDriverManager().getBrowserDriver());
 				break;
 			case FIREFOX:
-				driver = new FirefoxDriverManager().getBrowserDriver();
+				driver.set(new FirefoxDriverManager().getBrowserDriver());
 				break;
 			case EDGE:
-				driver = new EdgeDriverManager().getBrowserDriver();
+				driver.set(new EdgeDriverManager().getBrowserDriver());
 				break;
 			case SAFARI:
-				driver = new SafariDriverManager().getBrowserDriver();
+				driver.set(new SafariDriverManager().getBrowserDriver());
 				break;
 			case H_CHROME:
-				driver = new HeadlessChromeDriverManager().getBrowserDriver();
+				driver.set(new HeadlessChromeDriverManager().getBrowserDriver());
 				break;
 			case H_FIREFOX:
-				driver = new HeadlessFirefoxDriverManager().getBrowserDriver();
+				driver.set(new HeadlessFirefoxDriverManager().getBrowserDriver());
 				break;
 			case COCCOC:
-				driver = new CocCocDriverManager().getBrowserDriver();
+				driver.set(new CocCocDriverManager().getBrowserDriver());
 				break;
 			case BRAVE:
-				driver = new BraveDriverManager().getBrowserDriver();
+				driver.set(new BraveDriverManager().getBrowserDriver());
 				break;
 			default:
 				throw new BrowserNotSupportedException(browserName);
 		}
 		
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.get(getEnvironmentUrl(env));
-		return driver;
+		driver.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get().get(getEnvironmentUrl(env));
+		return driver.get();
 	}
 	
 	protected WebDriver openMultiBrowserBrowserStack(String browserName, String appUrl, String osName, String osVersion) {
@@ -161,16 +162,16 @@ public class BaseTest {
 		capabilities.setCapability("browserstack.selenium_version", "3.141.59");
 
 		try {
-			driver = new RemoteWebDriver(new URL(GlobalConstants.BROWSERSTACK_URL), capabilities);
+			driver.set(new RemoteWebDriver(new URL(GlobalConstants.BROWSERSTACK_URL), capabilities));;
 		} catch (MalformedURLException e) {
 			System.out.println("failed");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.get(appUrl);
-		return driver;
+		driver.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get().get(appUrl);
+		return driver.get();
 	}
 	
 	public String getEnvironmentUrl(String env) {
@@ -201,7 +202,7 @@ public class BaseTest {
 	
 	
 	public WebDriver getWebdriver() {
-		return this.driver;
+		return driver.get();
 	}
 
 	protected boolean verifyTrue(boolean condition) {
@@ -284,8 +285,9 @@ public class BaseTest {
 			}
 
 			if (driver != null) {
-				driver.manage().deleteAllCookies();
-				driver.quit();
+				driver.get().manage().deleteAllCookies();
+				driver.get().quit();
+				driver.remove();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="NopCommerce" parallel="false">
+<suite name="NopCommerce" parallel="tests" thread-count="2">
   <listeners>
   	<listener class-name="commons.MethodListener" />
   	<listener class-name="reportConfig.ExtentTestListener" />
@@ -14,6 +14,14 @@
   <!-- <parameter name="env" value="dev"></parameter> -->
   <test name="Run on Firefox">
   	<parameter name="browser" value="firefox"></parameter>
+    <classes>
+      <!--<class name="com.nopcommerce.commons.Common_02_Register_Cookie"/>-->
+      <class name="com.nopcommerce.user.Level_21_Multiple_Environment_Owner"/>
+    </classes>
+  </test>
+  
+  <test name="Run on Chrome">
+  	<parameter name="browser" value="chrome"></parameter>
     <classes>
       <!--<class name="com.nopcommerce.commons.Common_02_Register_Cookie"/>-->
       <class name="com.nopcommerce.user.Level_21_Multiple_Environment_Owner"/>
