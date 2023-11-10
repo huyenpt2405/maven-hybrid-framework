@@ -52,7 +52,7 @@ public class Level_08_Switch_Role extends BaseTest {
 		userLoginPage.loginAsUser(userEmailAddress, userPassword);
 		
 		adminHomePage = PageGeneratorManager.getAdminHomePage(driver);
-		adminHomePage.openPageUrl(GlobalConstants.ADMIN_URL);
+		adminHomePage.openPageUrl(GlobalConstants.getGlobalConstants().getAdminUrl());
 		adminLoginPage = PageGeneratorManager.getAdminLoginPage(driver);
 		
 		adminLoginPage.loginAsAdmin(adminEmail, adminPassword);

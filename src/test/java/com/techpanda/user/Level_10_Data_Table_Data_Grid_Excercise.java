@@ -52,7 +52,7 @@ public class Level_10_Data_Table_Data_Grid_Excercise extends BaseTest {
 	@Test
 	public void User_02_Swith_To_Admin() {
 		adminLoginPage = PageGeneratorManagerTechPanda.getAdminLoginPage(driver);
-		adminLoginPage.openPageUrl(GlobalConstants.TECHPANDA_ADMIN_URL);
+		adminLoginPage.openPageUrl(GlobalConstants.getGlobalConstants().getTechpandaAdminUrl());
 		
 		adminLoginPage.enterToTextboxByID("username", adminUserName);
 		adminLoginPage.enterToTextboxByID("login", adminPassword);
@@ -63,9 +63,7 @@ public class Level_10_Data_Table_Data_Grid_Excercise extends BaseTest {
 		adminCustomerPage.enterToHeaderFilterTextbox("customerGrid_filter_name", userFirstName + " " + userLastName);
 		adminCustomerPage.enterToHeaderFilterTextbox("customerGrid_filter_email", userEmailAddress);
 	}
-
 	
-
 	private WebDriver driver;
 	private UserHomePageObject userHomePage;
 	private UserLoginPageObject userLoginPage;

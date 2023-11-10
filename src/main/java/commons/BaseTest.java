@@ -31,7 +31,7 @@ import utilities.GlobalConstants;
 
 public class BaseTest {
 	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-	protected String projectPath = GlobalConstants.PROJECT_PATH;
+	protected String projectPath = GlobalConstants.getGlobalConstants().getProjectPath();
 	protected final Logger log;
 	
 	protected BaseTest() {
@@ -72,7 +72,7 @@ public class BaseTest {
 		}
 		
 		driver.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.get().get(GlobalConstants.USER_PORTAL_URL);
+		driver.get().get(GlobalConstants.getGlobalConstants().getUserPortalUrl());
 		return driver.get();
 	}
 	
@@ -162,7 +162,7 @@ public class BaseTest {
 		capabilities.setCapability("browserstack.selenium_version", "3.141.59");
 
 		try {
-			driver.set(new RemoteWebDriver(new URL(GlobalConstants.BROWSERSTACK_URL), capabilities));;
+			driver.set(new RemoteWebDriver(new URL(GlobalConstants.getGlobalConstants().getBrowserStackUrl()), capabilities));;
 		} catch (MalformedURLException e) {
 			System.out.println("failed");
 			// TODO Auto-generated catch block

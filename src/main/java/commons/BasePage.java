@@ -272,7 +272,7 @@ public class BasePage {
 	}
 	
 	public void uploadMultipleFiles(String... fileNames) {
-		String filePath = GlobalConstants.UPLOAD_FILES_PATH;
+		String filePath = GlobalConstants.getGlobalConstants().getUploadFilesPath();
 		String fullFileName = "";
 		
 		for (String fileName: fileNames) {
@@ -745,6 +745,6 @@ public class BasePage {
 		return date;
 	}
 	
-	private long longTimeout = GlobalConstants.LONG_TIMEOUT;
-	private long shortTimeout = GlobalConstants.SHORT_TIMEOUT;
+	private long longTimeout = GlobalConstants.getGlobalConstants().getLongTimeOut();
+	private long shortTimeout = GlobalConstants.getGlobalConstants().getShortTimeOut();
 }
